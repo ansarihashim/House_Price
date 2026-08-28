@@ -1,0 +1,8 @@
+# Extra dependencies for local development only (EDA notebook, regenerating
+# the model artifact via model/train.py). Not required by the deployed
+# Streamlit app — see requirements.txt for that.
+-r requirements.txt
+numpy>=2.0
+matplotlib>=3.9
+seaborn>=0.13
+jupyter>=1.1

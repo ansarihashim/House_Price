@@ -13,6 +13,15 @@ env/
 # scikit-learn dataset cache
 scikit_learn_data/
 
+# Streamlit local secrets / cache (config.toml itself IS committed)
+.streamlit/secrets.toml
+.streamlit/cache/
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
 # OS / editor
 .DS_Store
 Thumbs.db

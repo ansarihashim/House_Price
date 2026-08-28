@@ -1,6 +1,8 @@
-numpy>=2.0
-pandas>=2.2
-matplotlib>=3.9
-seaborn>=0.13
-scikit-learn>=1.5
-jupyter>=1.1
+# Pinned to exactly what model/artifact.joblib was trained and pickled
+# with (see model/train.py). scikit-learn pickles are not guaranteed
+# compatible across versions, so these must stay in sync with whatever
+# environment last ran `python -m model.train` to regenerate the artifact.
+streamlit>=1.38
+pandas==2.3.3
+scikit-learn==1.7.2
+joblib==1.5.2

@@ -55,23 +55,45 @@ analysis and reasoning behind each modeling decision.
 | ![Model Comparison](images/model_comparison.png) | ![Feature Importance](images/feature_importance.png) |
 | ![Residual Analysis](images/residual_analysis.png) | |
 
-## Setup
+## Try it: Streamlit app
+
+A Streamlit app (`app.py`) serves live predictions from the trained
+Gradient Boosting model — no retraining happens at request time; it loads
+the pre-trained artifact at `model/artifact.joblib`.
 
 ```bash
 pip install -r requirements.txt
+streamlit run app.py
+```
+
+## Setup (notebook / EDA / retraining)
+
+```bash
+pip install -r requirements-dev.txt
 jupyter notebook notebooks/House_PRICE.ipynb
 ```
 
 The dataset is fetched automatically on first run (cached locally by
-scikit-learn) — no manual data download needed.
+scikit-learn) — no manual data download needed. To regenerate
+`model/artifact.joblib` after changing the training code, run
+`python -m model.train`.
 
 ## Project Structure
 
 ```
 .
+├── app.py                    # Streamlit app (UI only — no ML logic)
+├── model/
+│   ├── train.py               # Reproduces the notebook's GBM training, saves the artifact
+│   ├── inference.py            # predict_house_price() used by app.py
+│   ├── pipeline.py             # Preprocessing + model bundled as one object
+│   └── artifact.joblib          # Pre-trained model (committed, loaded at runtime)
+├── .streamlit/
+│   └── config.toml            # Streamlit theme
 ├── notebooks/
-│   └── House_PRICE.ipynb   # Full analysis notebook
-├── images/                 # Charts exported from the notebook
-├── requirements.txt
+│   └── House_PRICE.ipynb      # Full analysis notebook
+├── images/                    # Charts exported from the notebook
+├── requirements.txt           # Runtime deps for the Streamlit app
+├── requirements-dev.txt       # + notebook/EDA/retraining deps
 └── README.md
 ```
